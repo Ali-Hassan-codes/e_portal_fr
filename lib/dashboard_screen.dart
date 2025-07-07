@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'AboutScreen.dart'; // Make sure this import is correct
+import 'AboutScreen.dart';
+import 'HelpScreen.dart'; // Make sure this import is correct
 
 class DashboardScreen extends StatelessWidget {
   final List<Map<String, dynamic>> options = [
@@ -61,7 +62,13 @@ class DashboardScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => AboutScreen()),
               );
-            } else if (item['label'] == 'Logout') {
+            }
+             if (item['label'] == 'Help') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HelpScreen()),
+              );
+            }  else if (item['label'] == 'Logout') {
               Navigator.pop(context); // Just go back for now
             }
           },
