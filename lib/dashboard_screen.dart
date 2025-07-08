@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'AboutScreen.dart';
-import 'HelpScreen.dart'; // Make sure this import is correct
-import 'SalaryScreen.dart'; // make sure file name matches
+import 'HelpScreen.dart';
+import 'SalaryScreen.dart';
+import 'ComplaintScreen.dart';
+import 'ProfileScreen.dart'; // 
+import 'SettingsScreens.dart';
+import 'MessagesScreen.dart';
+import 'FeedbackScreen.dart';
 
 class DashboardScreen extends StatelessWidget {
-    final int userId;
-    final String userName; // ✅ Add this
+  final int userId;
+  final String userName;
+  final String userEmail;
 
-  DashboardScreen({required this.userId, required this.userName});
+  DashboardScreen({required this.userId, required this.userName, required this.userEmail});
+
   final List<Map<String, dynamic>> options = [
     {'icon': Icons.person, 'label': 'Profile'},
     {'icon': Icons.attach_money, 'label': 'Salary'},
     {'icon': Icons.help_outline, 'label': 'Help'},
     {'icon': Icons.settings, 'label': 'Settings'},
-    {'icon': Icons.info, 'label': 'About'}, // We'll link this to AboutScreen
+    {'icon': Icons.info, 'label': 'About'},
     {'icon': Icons.message, 'label': 'Messages'},
-    {'icon': Icons.security, 'label': 'Security'},
+    {'icon': Icons.safety_check, 'label': 'Complain'},
     {'icon': Icons.feedback, 'label': 'Feedback'},
     {'icon': Icons.logout, 'label': 'Logout'},
   ];
@@ -29,12 +36,15 @@ class DashboardScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,
-        actions:  [
+        actions: [
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Center(child: Text("Welcome ${userName}",
-             style: TextStyle(color: Colors.white),
-            )),
+            child: Center(
+              child: Text(
+                "Welcome $userName",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ),
         ],
       ),
@@ -62,25 +72,68 @@ class DashboardScreen extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            if (item['label'] == 'About') {
+            if (item['label'] == 'Profile') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutScreen()),
+                MaterialPageRoute(
+                  builder: (_) => ProfileScreen(
+                    userId: userId,
+                    userName: userName,
+                    userEmail: userEmail,
+                  ),
+                ),
               );
-            }
-             else if (item['label'] == 'Help') {
+            } else if (item['label'] == 'Salary') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HelpScreen()),
+                MaterialPageRoute(builder: (_) => SalaryScreen(userId: userId)),
               );
-            }
-             else if (item['label'] == 'Salary') {
+            } 
+            else if (item['label'] == 'Profile') {
+                Navigator.push(
+                context,
+                  MaterialPageRoute(
+                  builder: (_) => ProfileScreen(
+                userId: userId,
+                userName: userName,
+                userEmail: userEmail,
+              ),
+            ),
+          );
+        }
+
+            else if (item['label'] == 'Help') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SalaryScreen(userId: userId)),
+                MaterialPageRoute(builder: (_) => HelpScreen()),
               );
-            }  else if (item['label'] == 'Logout') {
-              Navigator.pop(context); // Just go back for now
+            } else if (item['label'] == 'About') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AboutScreen()),
+              );
+            } else if (item['label'] == 'Complain') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ComplaintScreen(userId: userId)),
+              );
+            } else if (item['label'] == 'Settings') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SettingsScreens()), // Placeholder
+              );
+            } else if (item['label'] == 'Messages') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => Messagesscreen()), // Placeholder
+              );
+            } else if (item['label'] == 'Feedback') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => Feedbackscreen()),
+              );
+            } else if (item['label'] == 'Logout') {
+              Navigator.pop(context);
             }
           },
           child: Column(

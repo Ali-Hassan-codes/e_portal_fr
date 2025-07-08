@@ -36,10 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
         final data = jsonDecode(response.body);
         final userId = data['user']['id'];
         final userName = data['user']['name'];
+        final userEmail = data['user']['email'];
+
 
       Navigator.pushReplacement(
       context,
-       MaterialPageRoute(builder: (_) => DashboardScreen(userId: userId,userName: userName)),
+       MaterialPageRoute(builder: (_) => DashboardScreen(userId: userId,userName: userName, userEmail: userEmail)),
 );
       } else {
         setState(() {
