@@ -120,7 +120,9 @@ class DashboardScreen extends StatelessWidget {
             } else if (item['label'] == 'Settings') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => SettingsScreens()), // Placeholder
+                MaterialPageRoute(builder: (_) => SettingsScreen(userId: userId,
+                userName: userName,
+                userEmail: userEmail,)), // Placeholder
               );
             } else if (item['label'] == 'Messages') {
               Navigator.push(
@@ -130,7 +132,7 @@ class DashboardScreen extends StatelessWidget {
             } else if (item['label'] == 'Feedback') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => Feedbackscreen()),
+                MaterialPageRoute(builder: (_) => FeedbackScreen(userId: userId)),
               );
             } else if (item['label'] == 'Logout') {
               Navigator.pop(context);
