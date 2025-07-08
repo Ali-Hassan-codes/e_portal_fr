@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-// import 'login_screen.dart'; // we'll create this next
+ import 'login_screen.dart'; // we'll create this next
 // import 'AboutScreen.dart';
-import 'dashboard_screen.dart';
+// import 'dashboard_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 1), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashboardScreen()),
+        MaterialPageRoute(builder: (context) => LoginScreen()),
       );
     });
   }

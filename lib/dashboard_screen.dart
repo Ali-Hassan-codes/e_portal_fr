@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'AboutScreen.dart';
 import 'HelpScreen.dart'; // Make sure this import is correct
+import 'SalaryScreen.dart'; // make sure file name matches
 
 class DashboardScreen extends StatelessWidget {
+    final int userId;
+    final String userName; // ✅ Add this
+
+  DashboardScreen({required this.userId, required this.userName});
   final List<Map<String, dynamic>> options = [
     {'icon': Icons.person, 'label': 'Profile'},
     {'icon': Icons.attach_money, 'label': 'Salary'},
@@ -24,10 +29,10 @@ class DashboardScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,
-        actions: const [
+        actions:  [
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Center(child: Text("Welcome SHAKIR ALI",
+            child: Center(child: Text("Welcome ${userName}",
              style: TextStyle(color: Colors.white),
             )),
           ),
@@ -63,10 +68,16 @@ class DashboardScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => AboutScreen()),
               );
             }
-             if (item['label'] == 'Help') {
+             else if (item['label'] == 'Help') {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HelpScreen()),
+              );
+            }
+             else if (item['label'] == 'Salary') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SalaryScreen(userId: userId)),
               );
             }  else if (item['label'] == 'Logout') {
               Navigator.pop(context); // Just go back for now

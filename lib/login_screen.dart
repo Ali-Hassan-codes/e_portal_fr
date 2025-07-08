@@ -33,13 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => DashboardScreen()),
-        );
+        final data = jsonDecode(response.body);
+        final userId = data['user']['id'];
+        final userName = data['user']['name'];
+
+      Navigator.pushReplacement(
+      context,
+       MaterialPageRoute(builder: (_) => DashboardScreen(userId: userId,userName: userName)),
+);
       } else {
         setState(() {
-          error = 'Invalid credentials';
+          error = 'Invalid credentials yes';
         });
       }
     } catch (e) {
